@@ -1,0 +1,61 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+        <link type="text/css" href="{% static 'buy/css/style.css' %}" rel="stylesheet"/>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="shortcut icon" href="{% static 'buy/images/logo.png' %}" type="image/x-icon"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+{% block content %}
+<body>
+<div id="main-page">
+    <div class="list-div">
+        <div class="d1"><a href="{% url 'catalog' %}"><h3>КАТАЛОГ</h3></a></div>
+        <div class="d2"><a href="{% url 'main' %}"><span>ОРХИДЕЯ</span></a></div>
+        <div class="d3"><a href="{% url 'basket' %}"><h3>КОРЗИНА</h3></a></div>
+    </div>
+    <div class="picture-div">
+        <img class="picture" src="static/buy/images/flower.png">
+        <img class="picture-2" src="static/buy/images/flower-2.png">
+    </div>
+    <div id="adress">
+        <hr>
+            <p class="p-1">О МАГАЗИНЕ</p>
+            <p class="p-2">АДРЕС</p>
+            <p class="p-3">ПРОИЗВОДСТВО</p>
+        <div class="menu-class">
+            <div class="menu-1">
+                <span class="hide-1"></span>
+                <div class="circle-1">
+                    <img class="circle-1-photo" src="static/buy/images/circle-photo-1.png">
+                </div>
+                <div id="menu-1-info">
+                    <span>Информация-1</span>
+                </div>
+            </div>
+            <div class="menu-2">
+                <span class="hide-2"></span>
+                <div class="circle-2">
+                    <img class="circle-2-photo" src="static/buy/images/circle-photo-2.png">
+                </div>
+                <div id="menu-2-info">
+                    <span>ЗАО Курорт Усть-Качка, водогрязелечебница, 2-й этаж, при входе, слева</span>
+                </div>
+            </div>
+            <div class="menu-3">
+                <span class="hide-3"></span>
+                <div class="circle-3">
+                    <img class="circle-3-photo" src="static/buy/images/circle-photo-3.png">
+                </div>
+                <div id="menu-3-info">
+                    <span>Информация-3</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

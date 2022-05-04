@@ -1,0 +1,51 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+{% block content %}
+<div class="catalog-menu">
+  <div class="sidebar">
+    <a class="cat-link-main" href="{% url 'catalog' %}">Все категории</a>
+        <ul class="left-category-list">
+          {% for c in cats %}
+          <li class="spacing">
+            <a class="cat-link" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+  </div>
+  <div>
+    {% for g in goods %}
+    <div id="{{ g.id }}" class="product-item">
+      <img src="{{g.photo.url}}">
+      <div class="product-list">
+        <h3 id="text-h3">{{ g.name }}</h3>
+          <span class="price">{{ g.price }}₽</span>
+        <form action="{% url 'add' id=g.id %}" method="post">{% csrf_token %}
+          <input type="hidden" name="url_from" value="{{ request.path }}">
+          <button type="submit" class="button-add">В корзину</button>
+        </form>
+        <hr>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a class="btn-list btn-list-all" href="?page=1"> << </a>
+              <a class="btn-list btn-list-all" href="?page={{ page_obj.previous_page_number }}"> < </a>
+          {% endif %}
+
+          <span class="current">
+            {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+          </span>
+
+          {% if page_obj.has_next %}
+              <a class="btn-list btn-list-all" href="?page={{ page_obj.next_page_number }}"> > </a>
+              <a class="btn-list btn-list-all" href="?page={{ page_obj.paginator.num_pages }}"> >> </a>
+          {% endif %}
+      </span>
+  </div>
+</div>
+{% endblock %}

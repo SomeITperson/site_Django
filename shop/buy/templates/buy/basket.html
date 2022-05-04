@@ -1,0 +1,53 @@
+{% extends 'buy/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="basket-main">
+<div class="basket-title">
+    <span>Корзина</span>
+</div>
+<div class="warning">
+    <div class="warning-span">
+        <span>Внимание!Корзина создана в целях удобства, чтобы вы могли показать выбранные Вами товары на кассе.</span>
+    </div>
+    {% if request.session.cart %}
+    <div class="button-delete-div">
+        <form action="{% url 'delete' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="url_from" value="{{ request.path }}">
+            <button class="button-delete" type="submit">Удалить все товары</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+<div id="basket">
+<!--    {% for s in request.session.cart %}-->
+<!--    <h5>{{ s }}</h5>-->
+<!--    {% endfor %}-->
+    {% if not request.session.cart %}
+    <div class="empty-basket">
+        <h3 class="title-h3">Тут пусто...</h3>
+        <a href="https://pngicon.ru/img-kot-s-miskoy-397.html"><img src="https://pngicon.ru/file/uploads/cat_hungry-128x128.png" alt="кот с миской"></a>
+    </div>
+    {% else %}
+        {% for g in goods %}
+            {% if g.id in list %}
+                <div class="basket-item">
+                    <div class="red">
+                        <form action="{% url 'remove' id=g.id%}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="url_from" value="{{ request.path }}">
+                            <button class="button-delete-one-item" type="submit">&#10060;</button>
+                        </form>
+                    </div>
+                    <br>
+                    <h3>{{ g.name }}</h3>
+                    <img src="{{g.photo.url}}">
+                    <span>{{ g.price }}₽</span>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+</div>
+{% endblock %}

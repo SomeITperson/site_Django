@@ -1,0 +1,37 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+        <link type="text/css" href="{% static 'buy/css/style.css' %}" rel="stylesheet"/>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="shortcut icon" href="{% static 'buy/images/logo.png' %}" type="image/x-icon"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    {% block mainmenu %}
+        <header>
+            <div>
+                <nav>
+                    <div class="list">
+<!--                        {% if basket_selected == 0 %}-->
+<!--                            <li><a href="{% url 'basket' %}" class="top-button">КОРЗИНА</a></li>-->
+<!--                        {% endif %}-->
+<!--                        {% if cat_selected == 0 %}-->
+<!--                            <li><a href="{% url 'catalog' %}" class="top-button">КАТАЛОГ</a></li>-->
+<!--                        {% endif %}-->
+                        {% for m in menu %}
+                        <div class="list-li"><a href="{% url m.url_name %}" class="top-button">{{ m.title }}</a></div>
+                        {% endfor %}
+                    </div>
+                </nav>
+            </div>
+        </header>
+        {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block menu %}
+    {% endblock %}
+    </body>
+</html>
